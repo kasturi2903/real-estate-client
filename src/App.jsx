@@ -11,66 +11,95 @@ import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
 
 function App() {
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Layout />,
+  //     children: [
+  //       {
+  //         path: "/",
+  //         element: <HomePage />,
+  //       },
+  //       {
+  //         path: "/list",
+  //         element: <ListPage />,
+  //         loader: listPageLoader,
+  //       },
+  //       {
+  //         path: "/:id",
+  //         element: <SinglePage />,
+  //         loader: singlePageLoader,
+  //       },
+  //       {
+  //         path: "/login",
+  //         element: <Login />,
+  //       },
+  //       {
+  //         path: "/register",
+  //         element: <Register />,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     path: "/",
+  //     element: <RequireAuth />,
+  //     children: [
+  //       {
+  //         path: "/profile",
+  //         element: <ProfilePage />,
+  //         loader: profilePageLoader,
+  //       },
+  //       {
+  //         path: "/profile/update",
+  //         element: <ProfileUpdatePage />,
+  //       },
+  //       {
+  //         path: "/add",
+  //         element: <NewPostPage />,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     path: "/profile/:receiverId",
+  //     element: <RequireAuth />,
+  //     children: [
+  //       {
+  //         path: "",
+  //         element: <ProfilePage />,
+  //         loader: profilePageLoader,
+  //       },
+  //     ],
+  //   },
+  // ]);
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/",
-          element: <HomePage />,
-        },
-        {
-          path: "/list",
-          element: <ListPage />,
-          loader: listPageLoader,
-        },
-        {
-          path: "/:id",
-          element: <SinglePage />,
-          loader: singlePageLoader,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/register",
-          element: <Register />,
-        },
-      ],
-    },
-    {
-      path: "/",
-      element: <RequireAuth />,
-      children: [
-        {
-          path: "/profile",
-          element: <ProfilePage />,
-          loader: profilePageLoader,
-        },
-        {
-          path: "/profile/update",
-          element: <ProfileUpdatePage />,
-        },
-        {
-          path: "/add",
-          element: <NewPostPage />,
-        },
-      ],
-    },
-    {
-      path: "/profile/:receiverId",
-      element: <RequireAuth />,
-      children: [
-        {
-          path: "",
-          element: <ProfilePage />,
-          loader: profilePageLoader,
-        },
-      ],
-    },
-  ]);
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/list", element: <ListPage />, loader: listPageLoader },
+      { path: "/:id", element: <SinglePage />, loader: singlePageLoader },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+    ],
+  },
+  {
+    path: "/profile/:receiverId?",
+    element: <RequireAuth />,
+    children: [
+      { path: "", element: <ProfilePage />, loader: profilePageLoader },
+      { path: "update", element: <ProfileUpdatePage /> },
+    ],
+  },
+  {
+    path: "/add",
+    element: <RequireAuth />,
+    children: [
+      { path: "", element: <NewPostPage /> },
+    ],
+  },
+]);
+
 
   return <RouterProvider router={router} />;
 }
